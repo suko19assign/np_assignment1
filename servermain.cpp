@@ -105,9 +105,18 @@ int main(int argc, char **argv) {
             }
 
             /* build assignment */
-            char *op = randomType();     // from libcalc :contentReference[oaicite:3]{index=3}
+            char *op = randomType();
             int    i1 = randomInt(), i2 = randomInt(), iref = 0;
             double f1 = randomFloat(), f2 = randomFloat(), fref = 0;
+            if (op[0] == 'f') {
+                if (strcmp(op, "fdiv") == 0) {
+                    while (f2 == 0.0) f2 = randomFloat();
+                }
+            } else {
+                if (strcmp(op, "div") == 0) {
+                    while (i2 == 0) i2 = randomInt();
+                }
+            }
 
             std::ostringstream msg;
             if (op[0] == 'f') {
@@ -154,3 +163,4 @@ int main(int argc, char **argv) {
         close(fd);
     }
 }
+
